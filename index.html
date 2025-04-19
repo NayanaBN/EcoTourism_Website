@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhancing Tourism - Explore, Discover, Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Enhancing Tourism</h1>
+            <p>Explore, Discover, and Connect with Local Culture</p>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#visitor-count">Visitor Count</a></li>
+            <li><a href="#artisan-showcase">Artisan Showcase</a></li>
+            <li><a href="#discover-places">Discover Places</a></li>
+            <li><a href="#about">About Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Visitor Count Section -->
+    <section id="visitor-count" class="container">
+        <h2>Check Real-Time Visitor Count</h2>
+        <div class="visitor-count-form">
+            <label for="place-select">Select a Place:</label>
+            <select id="place-select">
+                <option value="">-- Select a Place --</option>
+                <option value="gingee-fort">Gingee Fort, Tamil Nadu</option>
+                <option value="bidri-artifacts">Bidri Artifacts, Karnataka</option>
+                <option value="talakad-temples">Talakad Temples, Karnataka</option>
+            </select>
+            <button id="check-count">Check Visitor Count</button>
+            <p id="visitor-result">Visitor Count: <span id="count">0</span></p>
+        </div>
+    </section>
+
+    <!-- Artisan Showcase Section -->
+    <section id="artisan-showcase" class="container">
+        <h2>Local Artisan Showcase</h2>
+        <div id="artisan-grid" class="artisan-grid">
+            <!-- Artisan cards will be dynamically inserted here -->
+        </div>
+    </section>
+
+    <!-- Discover Places Section -->
+    <section id="discover-places" class="container">
+        <h2>Discover Unknown Places</h2>
+        <div class="place-grid">
+            <div class="place-card">
+                <img src="fort.jpg" alt="Gingee Fort">
+                <h3>Gingee Fort, Tamil Nadu</h3>
+                <p>Explore the history of this ancient fort.</p>
+                <button>Learn More</button>
+            </div>
+            <div class="place-card">
+                <img src="tal.jpg" alt="Talakad Temples">
+                <h3>Talakad Temples, Karnataka</h3>
+                <p>Discover the hidden temples of Talakad.</p>
+                <button>Learn More</button>
+            </div>
+            <div class="place-card">
+                <img src="bimg.jpg" alt="Bidri Village">
+                <h3>Bidri Village, Karnataka</h3>
+                <p>Learn about the artisans of Bidriware.</p>
+                <button>Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="container">
+        <h2>About Us</h2>
+        <p>We are dedicated to enhancing tourism by connecting travelers with local culture, history, and artisans. Our platform promotes sustainable tourism and supports local communities.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Enhancing Tourism. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Visitor Count and Artisan Showcase -->
+    <script>
+        // Visitor Count Data
+        const places = {
+            "gingee-fort": { count: 120, artisans: [
+                { name: "Pottery Artisan", image: "Pot.jpg", description: "Traditional pottery from Gingee." },
+                { name: "Handloom Weaver", image: "hand.jpeg", description: "Eco-friendly handloom fabrics." }
+            ]},
+            "bidri-artifacts": { count: 85, artisans: [
+                { name: "Bidri Artisan", image: "bimg.jpg", description: "Handcrafted metal artifacts." }
+            ]},
+            "talakad-temples": { count: 60, artisans: [
+                { name: "Sandalwood Carver", image: "sand.jpEg", description: "Intricate sandalwood carvings." }
+            ]}
+        };
+
+        // Visitor Count Functionality
+        document.getElementById('check-count').addEventListener('click', function () {
+            const selectedPlace = document.getElementById('place-select').value;
+            if (selectedPlace && places[selectedPlace]) {
+                document.getElementById('count').textContent = places[selectedPlace].count;
+                displayArtisans(selectedPlace); // Display artisans for the selected place
+            } else {
+                document.getElementById('count').textContent = 0;
+                document.getElementById('artisan-grid').innerHTML = ""; // Clear artisan grid
+            }
+        });
+
+        // Function to Display Artisans
+        function displayArtisans(place) {
+            const artisanGrid = document.getElementById('artisan-grid');
+            artisanGrid.innerHTML = ""; // Clear previous content
+
+            if (places[place] && places[place].artisans) {
+                places[place].artisans.forEach(artisan => {
+                    const artisanCard = `
+                        <div class="artisan-card">
+                            <img src="${artisan.image}" alt="${artisan.name}">
+                            <h3>${artisan.name}</h3>
+                            <p>${artisan.description}</p>
+                            <button>View Details</button>
+                        </div>
+                    `;
+                    artisanGrid.innerHTML += artisanCard;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
